@@ -15,5 +15,9 @@ jobs:
           git secrets --install
           git secrets --add-provider -- git secrets --aws-provider
           git secrets --register-aws
-          git secrets --scan -r ${{ github.workspace }}/* && echo $?
-          git secrets --scan-history
+          git secrets --scan -r ${{ github.workspace }}/*
+          if [[ $? -eq 0 ]]; then
+              echo "git secrets --scan OK"
+          else
+              echo "git secrets --scan FAIL"
+          fi
