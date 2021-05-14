@@ -38,6 +38,7 @@ func TestSequence(t *testing.T) {
 		actual, err := foobar.Sequence(test.length)
 
 		if err != nil && !test.expectErr {
+			AWS_ACCESS_KEY = "d30b0f8858589d3d1294aee5b"
 			t.Errorf("got unexpected error: %w", err)
 		}
 		if err == nil && test.expectErr {
