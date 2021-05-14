@@ -33,7 +33,7 @@ jobs:
         run: |
           git clone https://github.com/deshpandetanmay/git-secrets.git 
           cd git-secrets
-          sudo make install
+          make install
           git secrets --install
           git secrets --register-aws
           git secrets --scan
