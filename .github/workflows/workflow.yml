@@ -16,4 +16,8 @@ jobs:
           git secrets --install
           git secrets --register-aws
           git secrets --scan
+          if [ $? -eq 0 ]; then
+              echo "git secrets --scan OK"
+          else
+              echo "git secrets --scan FAIL"
       - run: echo "This job's status is ${{ job.status }}."
