@@ -1,15 +1,14 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  check-for-secrets:
+    runs-on: 'ubuntu-latest'
     steps:
-      - name: Check out repository code
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Find Secrets
-        jobs:
-          main:
-            runs-on: ubuntu-latest
-            steps:
-              - uses: actions/checkout@v2
-              - uses: max/secret-scan@master
+      - name: Run Yelp's detect-secrets
+        uses: RobertFischer/detect-secrets-action@v2.0.0
+      - name: Commit back .secrets.baseline (if it was missing)
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "build(detect-secrets): Commit the newly-generated .secrets.baseline file"
