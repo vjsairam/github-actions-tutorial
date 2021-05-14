@@ -7,7 +7,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: |
-          git clone https://github.com/deshpandetanmay/git-secrets.git
+          git clone https://github.com/awslabs/git-secrets.git
           cd git-secrets
           sudo make install
       - name: Scan secrets in the repository
@@ -15,3 +15,4 @@ jobs:
           git secrets --install
           git secrets --register-aws
           git secrets --scan -r ${{ github.workspace }}/*
+          git secrets --scan-history
