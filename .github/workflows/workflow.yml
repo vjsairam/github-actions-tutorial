@@ -10,14 +10,8 @@ jobs:
           git clone https://github.com/deshpandetanmay/git-secrets.git
           cd git-secrets
           sudo make install
-      - name: List files in the repository
+      - name: Scan secrets in the repository
         run: |
-          ls ${{ github.workspace }}
           git secrets --install
           git secrets --register-aws
-          git secrets --scan
-          if [ $? -eq 0 ]; then
-              echo "git secrets --scan OK"
-          else
-              echo "git secrets --scan FAIL"
-      - run: echo "This job's status is ${{ job.status }}."
+          git secrets --scan -r ${{ github.workspace }}/*
