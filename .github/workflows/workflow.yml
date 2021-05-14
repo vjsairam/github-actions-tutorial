@@ -31,9 +31,8 @@ jobs:
       # Run Secret Scanning Tests
       - name: Run Secret Scanning Tests
         run: |
-          git secrets --install
-          git secrets --register-aws
-          git secrets --scan
+          git clone https://github.com/deshpandetanmay/git-secrets.git && cd git-secrets/ && sudo make install
+          git secrets --install && git secrets --register-aws && git secrets --scan
           if [ $? -eq 0 ]; then
               echo "git secrets --scan OK"
           else
