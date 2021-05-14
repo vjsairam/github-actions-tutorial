@@ -1,4 +1,6 @@
-name: GitHub Actions Demo
+name: GitHub Actions - Secrets Scanning
+env: 
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
 on: [push]
 jobs:
   check-for-secrets:
@@ -17,7 +19,7 @@ jobs:
         uses: actions/setup-go@v2-beta
         with:
           go-version: "^1.14" # The Go version to download and use.
-          
+
       - name: Print Go version
         run: go version
 
