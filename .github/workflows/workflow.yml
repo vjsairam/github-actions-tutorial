@@ -6,18 +6,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: |
-          git clone https://github.com/awslabs/git-secrets.git
-          cd git-secrets
-          sudo make install
-      - name: Scan secrets in the repository
-        run: |
-          git secrets --install
-          git secrets --add-provider -- git secrets --aws-provider
-          git secrets --register-aws
-          git secrets --scan ${{ github.workspace }}/*
-          if [[ $? -eq 0 ]]; then
-              echo "git secrets --scan OK"
-          else
-              echo "git secrets --scan FAIL"
-          fi
+      - name: Find Secrets
+        jobs:
+          main:
+            runs-on: ubuntu-latest
+            steps:
+              - uses: actions/checkout@v2
+              - uses: max/secret-scan@master
