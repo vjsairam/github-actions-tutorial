@@ -13,6 +13,7 @@ jobs:
       - name: Scan secrets in the repository
         run: |
           git secrets --install
+          git secrets --add-provider -- git secrets --aws-provider
           git secrets --register-aws
-          git secrets --scan -r ${{ github.workspace }}/*
+          git secrets --scan -r ${{ github.workspace }}/* && echo $?
           git secrets --scan-history
